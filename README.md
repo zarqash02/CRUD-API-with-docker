@@ -11,7 +11,6 @@ docker compose -f postgresql.yaml up -d
 | Service  | URL / Port                                     |
 |----------|------------------------------------------------|
 | API      | http://localhost:8000 (Swagger UI at `/docs`)  |
-| pgAdmin  | http://localhost:8001                          |
 | Postgres | `localhost:5000` (mapped to 5432 in container) |
 
 Stop with `docker compose -f postgresql.yaml down`. Data lives in the `postgres_data` volume and survives this; add `-v` to wipe it.
@@ -20,8 +19,6 @@ Stop with `docker compose -f postgresql.yaml down`. Data lives in the `postgres_
 
 | Method | Path          | Description             | Body (JSON)                            | Success | Error                                  |
 |--------|---------------|-------------------------|----------------------------------------|---------|----------------------------------------|
-| GET    | `/`           | API info                | none                                   | 200     | none                                   |
-| GET    | `/health`     | Health check            | none                                   | 200     | none                                   |
 | GET    | `/tasks`      | List all tasks          | none                                   | 200     | none                                   |
 | GET    | `/tasks/{id}` | Get a single task       | none                                   | 200     | 200 with `{"error": ...}` if not found |
 | POST   | `/tasks`      | Create a task           | `{"title": str, "done": bool = false}` | 201     | 400 if `title` is empty                |
@@ -111,7 +108,10 @@ Result:
   }
 ]
 ```
+<<<<<<< HEAD
 
 ## Architecture note
 
 <!-- State honestly what changed when you swapped storage: which files, and whether routes/service were touched. -->
+=======
+>>>>>>> 1686ee104d94c0741181da8b484ba91f49c9d72c
