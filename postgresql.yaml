@@ -1,0 +1,36 @@
+services:
+  postgresql:
+    image: postgres
+    ports:
+    - 5000:5432
+    environment:
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  
+  pgadmin4:
+    image: dpage/pgadmin4
+    ports:
+      - 8001:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: 123
+  
+
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql+psycopg://postgres:123@postgresql:5432/postgres
+    depends_on:
+      postgresql:
+        condition: service_healthy
+volumes:
+  postgres_data:

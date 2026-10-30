@@ -1,0 +1,12 @@
+# Virtual environment and cache
+__pycache__/
+venv/
+
+# Environment secrets (Ignore all .env files EXCEPT .env.example)
+.env
+.env.*
+!.env.example
+
+# IDE settings
+.vscode/
+.idea/
