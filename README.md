@@ -110,10 +110,3 @@ Result:
   }
 ]
 ```
-<<<<<<< HEAD
-
-## Architecture note
-
-<!-- State honestly what changed when you swapped storage: which files, and whether routes/service were touched. -->
-=======
->>>>>>> 1686ee104d94c0741181da8b484ba91f49c9d72c
