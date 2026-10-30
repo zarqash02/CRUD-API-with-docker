@@ -14,6 +14,17 @@ def get_db():
     finally:
         db.close()
 
+def seed_tasks() -> None:
+    with SessionLocal() as db:
+        if db.query(Task.id).first() is not None:
+            return
+        db.add_all([
+            Task(title="Buy groceries", done=False),
+            Task(title="Finish project report", done=False),
+            Task(title="Call the dentist", done=True),
+        ])
+        db.commit()
+
 
 class TaskRepository:
     def __init__(self, db: Session):
