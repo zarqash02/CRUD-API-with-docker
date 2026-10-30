@@ -27,7 +27,7 @@ Stop with `docker compose -f postgresql.yaml down`. Data lives in the `postgres_
 
 ## Example
 
-Create a task. Quoting differs by shell, so use the matching command:
+
 **Windows cmd**
 ```bat
 curl -i -X POST http://localhost:8000/tasks -H "Content-Type: application/json" -d "{\"title\":\"Buy groceries\"}"
