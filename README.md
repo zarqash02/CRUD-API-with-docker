@@ -30,11 +30,15 @@ Stop with `docker compose -f postgresql.yaml down`. Data lives in the `postgres_
 
 ## Example
 
+Create a task. Quoting differs by shell, so use the matching command:
+**Windows cmd**
+```bat
+curl -i -X POST http://localhost:8000/tasks -H "Content-Type: application/json" -d "{\"title\":\"Buy groceries\"}"
 ```
-$ curl -i -X POST http://localhost:8000/tasks \
-    -H "Content-Type: application/json" \
-    -d '{"title":"Buy groceries"}'
 
+Response:
+
+```
 HTTP/1.1 201 Created
 date: Fri, 30 Oct 2026 12:00:00 GMT
 server: uvicorn
@@ -46,18 +50,38 @@ content-type: application/json
 
 ## Persistence check
 
-1. Create a task:
+## 1. Create a task:
+
+   bash / macOS / Linux / Git Bash:
    ```bash
    curl -i -X POST http://localhost:8000/tasks -H "Content-Type: application/json" -d '{"title":"persist me"}'
    ```
-2. Destroy and recreate every container (the volume is kept):
+   Windows cmd:
+   ```bat
+   curl -i -X POST http://localhost:8000/tasks -H "Content-Type: application/json" -d "{\"title\":\"persist me\"}"
+   ```
+   Windows PowerShell 5.1:
+   ```powershell
+   curl.exe -i -X POST http://localhost:8000/tasks -H "Content-Type: application/json" -d '{\"title\":\"persist me\"}'
+   ```
+   PowerShell 7.3+:
+   ```powershell
+   curl.exe -i -X POST http://localhost:8000/tasks -H "Content-Type: application/json" -d '{"title":"persist me"}'
+   ```
+## 2. Destroy and recreate every container (the volume is kept; same in every shell):
    ```bash
    docker compose -f postgresql.yaml down
    docker compose -f postgresql.yaml up -d
    ```
-3. Read it back:
+## 3. Read it back:
+
+   bash / cmd:
    ```bash
    curl -i http://localhost:8000/tasks
+   ```
+   PowerShell:
+   ```powershell
+   curl.exe -i http://localhost:8000/tasks
    ```
 
 Result:
@@ -87,3 +111,7 @@ Result:
   }
 ]
 ```
+
+## Architecture note
+
+<!-- State honestly what changed when you swapped storage: which files, and whether routes/service were touched. -->
