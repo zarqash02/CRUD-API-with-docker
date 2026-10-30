@@ -5,6 +5,8 @@ A CRUD API for managing a to-do list, built with FastAPI and SQLAlchemy. Tasks a
 ## Run
 
 ```bash
+git clone https://github.com/zarqash02/CRUD-API-with-docker.git
+cd CRUD-API-with-docker
 docker compose -f postgresql.yaml up -d
 ```
 
